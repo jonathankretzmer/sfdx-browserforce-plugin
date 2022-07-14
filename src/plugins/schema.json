@@ -50,6 +50,15 @@
           "$ref": "./security/schema.json"
         }
       }
+    },
+    "plugins": {
+      "title": "plugins",
+      "description": "package names of third-party modules to load",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
     }
   }
 }

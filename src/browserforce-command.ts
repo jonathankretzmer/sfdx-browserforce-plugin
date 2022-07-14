@@ -48,6 +48,12 @@ export class BrowserforceCommand extends SfdxCommand {
       throw new Error('Failed parsing definitionfile');
     }
     // TODO: use require.resolve to dynamically load plugins from npm packages
+    if (definition.plugins?.length) {
+      for (const plugin of definition.plugins) {
+        const { key, implementation } = require.resolve(plugin);
+        DRIVERS[key] = implementation;
+      }
+    }
     this.settings = ConfigParser.parse(DRIVERS, definition);
     this.bf = new Browserforce(this.org, this.ux.cli);
     this.ux.startSpinner('logging in');
