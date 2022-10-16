@@ -3,7 +3,7 @@ import { Org } from '@salesforce/core';
 import assert from 'assert';
 import { Browserforce } from '../src/browserforce';
 
-describe('Browser', function () {
+describe('Browserforce', function () {
   this.slow('30s');
   this.timeout('2m');
   describe('login()', () => {
@@ -35,28 +35,6 @@ describe('Browser', function () {
       await bf.login();
       const myDomain = bf.getMyDomain();
       assert.notDeepEqual(null, myDomain);
-      await bf.logout();
-    });
-  });
-  describe('getInstanceDomain()', () => {
-    it('should determine an instance domain for a scratch org with my domain', async () => {
-      const defaultScratchOrg = await Org.create({});
-      const ux = await UX.create();
-      const bf = new Browserforce(defaultScratchOrg, ux);
-      await bf.login();
-      const instanceDomain = bf.getInstanceDomain();
-      assert.notDeepEqual(null, instanceDomain);
-      await bf.logout();
-    });
-  });
-  describe('getLightningUrl()', () => {
-    it('should determine a LEX URL for a scratch org with my domain', async () => {
-      const defaultScratchOrg = await Org.create({});
-      const ux = await UX.create();
-      const bf = new Browserforce(defaultScratchOrg, ux);
-      await bf.login();
-      const lexUrl = bf.getLightningUrl();
-      assert.notDeepEqual(null, lexUrl);
       await bf.logout();
     });
   });
